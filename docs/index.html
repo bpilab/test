@@ -54,12 +54,28 @@
 		console.log(userEmail);
 
 		var text = "Your column in spreadsheet is: ";
-		var index = vals.indexOf(userEmail) + 1;
+		var index = vals.indexOf(userEmail) + 2;
 		text += index.toString() + "<BR>";
 		document.getElementById("datadiv").innerHTML = text;
 
             }, function (reason) {
                 console.error('error: ' + reason.result.error.message);
+            });
+
+	    params = {
+                // The spreadsheet to request.
+                spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
+
+                // The ranges to retrieve from the spreadsheet.
+                range: 'Sheet1!B2',
+		majorDimension: 'ROWS',
+		values: [['test']],
+	    };
+	    request = gapi.client.sheets.spreadsheets.values.append(params);
+	    request.then(function(response) {
+		console.log(response);
+	    }, function(reason) {
+	        console.error('error: ' + reason.result.error.message);
             });
 
         }
