@@ -74,7 +74,10 @@
 	    };
 	    request = gapi.client.sheets.spreadsheets.values.append(params);
 	    request.then(function(response) {
-		console.log(response);
+		// console.log(response);
+		var result = response.result;
+		console.log('Update Range:');
+		console.log(result.updates.updatedRange);
 	    }, function(reason) {
 	        console.error('error: ' + reason.result.error.message);
             });
