@@ -69,6 +69,7 @@
                 // The ranges to retrieve from the spreadsheet.
                 range: 'Sheet1!B2',
 		majorDimension: 'ROWS',
+		valueInputOption: 'USER_ENTERED',
 		values: [['test']],
 	    };
 	    request = gapi.client.sheets.spreadsheets.values.append(params);
