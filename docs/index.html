@@ -94,10 +94,17 @@
 		    valueInputOption: 'USER_ENTERED',
 		    includeValuesInResponse: 'true',
 		    responseValueRenderOption: 'UNFORMATTED_VALUE',
-		    values: [[sheet_time]],
+		    //		    values: [[sheet_time]],
 		};
 		console.log(params);
-		request2 = gapi.client.sheets.spreadsheets.values.update(params);
+
+		var valueRangeBody = {
+		    range: update_range,
+		    values: [[sheet_time]],
+		};
+
+
+		request2 = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
 		request2.then(function(response) {
 		    console.log(response);
 		    var result = response.result;
