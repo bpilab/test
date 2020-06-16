@@ -62,6 +62,7 @@
                 console.error('error: ' + reason.result.error.message);
             });
 
+	    var sheet_time = 0;
 	    params = {
                 // The spreadsheet to request.
                 spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
@@ -71,7 +72,7 @@
 		majorDimension: 'ROWS',
 		valueInputOption: 'USER_ENTERED',
 		includeValuesInResponse: 'true',
-		responseValueRenderOption: 'FORMATTED_VALUE',
+		responseValueRenderOption: 'UNFORMATTED_VALUE',
 		values: [['=NOW()']],
 	    };
 	    request = gapi.client.sheets.spreadsheets.values.append(params);
@@ -80,9 +81,15 @@
 		var result = response.result;
 		console.log('Update Range:');
 		console.log(result.updates.updatedRange);
+		sheet_time = result.updates.updatedData.values[0];
+		console.log(sheet_time);
 	    }, function(reason) {
 	        console.error('error: ' + reason.result.error.message);
             });
+
+	    params.values = [[sheet_time]];
+
+	    console.log(params);
 
         }
 
