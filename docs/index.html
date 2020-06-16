@@ -70,6 +70,8 @@
                 range: 'Sheet1!B2',
 		majorDimension: 'ROWS',
 		valueInputOption: 'USER_ENTERED',
+		includeValuesInResponse: 'true',
+		responseValueRenderOption: 'FORMATTED_VALUE',
 		values: [['=NOW()']],
 	    };
 	    request = gapi.client.sheets.spreadsheets.values.append(params);
