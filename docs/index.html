@@ -47,8 +47,16 @@
             request.then(function (response) {
                 // TODO: Change code below to process the `response` object:
 		var sheet = response.result;
-		document.getElementById("datadiv").innerHTML = sheet;
+		var vals = sheet.values[0];
+		var text = "";
+		for (i = 0; i < vals.length; i++)
+		{
+		    text += vals[i] + "<br>";
+		}
+		document.getElementById("datadiv").innerHTML = text;
 		console.log(sheet);
+		var auth = gapi.auth2.getAuthInstance();
+		console.log(auth.currentUser.get().getBasicProfile().getEmail());
             }, function (reason) {
                 console.error('error: ' + reason.result.error.message);
             });
