@@ -54,7 +54,7 @@
 		console.log(userEmail);
 
 		var text = "Your column in spreadsheet is: ";
-		var index = vals.findIndex(userEmail) + 1;
+		var index = vals.indexOf(userEmail) + 1;
 		text += index.toString() + "<BR>";
 		document.getElementById("datadiv").innerHTML = text;
 
