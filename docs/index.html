@@ -70,7 +70,7 @@
                 range: 'Sheet1!B2',
 		majorDimension: 'ROWS',
 		valueInputOption: 'USER_ENTERED',
-		values: [['test']],
+		values: [['=NOW()']],
 	    };
 	    request = gapi.client.sheets.spreadsheets.values.append(params);
 	    request.then(function(response) {
