@@ -105,10 +105,7 @@
 
 		request2 = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
 		request2.then(function(response) {
-		    console.log(response);
-		    var result = response.result;
-		    console.log(result.updates.updatedRange);
-		    console.log(result.updates.updatedData.values[0]);
+		    console.log(response.result);
 		}, function(reason) {
 	            console.error('error: ' + reason.result.error.message);
 		});
@@ -155,20 +152,11 @@
             }
         }
 
-        function handleSignInClick(event) {
-            gapi.auth2.getAuthInstance().signIn();
-        }
-
-        function handleSignOutClick(event) {
-            gapi.auth2.getAuthInstance().signOut();
-        }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
         </script>
 
-    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
-    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
     <button id="makeApiCall" onclick="makeApiCall()">Make API Call</button>
 
 
