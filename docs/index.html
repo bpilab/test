@@ -40,7 +40,7 @@
                 spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
 
                 // The ranges to retrieve from the spreadsheet.
-                range: 'Sheet1!B2:Z2',
+                range: 'Sheet1!2:2',
             };
 
             var request = gapi.client.sheets.spreadsheets.values.get(params);
@@ -53,9 +53,10 @@
 		var userEmail = auth.currentUser.get().getBasicProfile().getEmail();
 		console.log(userEmail);
 
-		var text = "Your column in spreadsheet is: ";
-		var index = vals.indexOf(userEmail) + 2;
-		text += index.toString() + "<BR>";
+		var text = "Your column in spreadsheet is: '";
+		var index = vals.indexOf(userEmail);
+		var column_code = (index < 26) ? String.fromCharCode(index + 65) :  String.fromCharCode(Math.floor(index/26) + 65, index%26 + 65);
+		text += column_code + "'<BR>";
 		document.getElementById("datadiv").innerHTML = text;
 
             }, function (reason) {
