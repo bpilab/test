@@ -11,32 +11,30 @@
   <div id="datadiv">Text</div>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-    <a href="#" onclick="signOut();">Sign out</a>
+    <button id="signOut" onclick="signOut();">Sign out</button>
 
     <script>
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-        }
+      var userEmail = "";
 
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
+      function signOut() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+              console.log('User signed out.');
+          });
+      }
+
+      function onSignIn(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+          console.log('Name: ' + profile.getName());
+          console.log('Image URL: ' + profile.getImageUrl());
+          console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	  userEmail = profile.getEmail();
+      }
     </script>
 
 
-
-
     <script>
-
-      var column_code = "";
-
       function makeApiCall() {
             var params = {
                 // The spreadsheet to request.
@@ -63,13 +61,6 @@
 		var datadiv = document.getElementById("datadiv");
 		datadiv.innerHTML = text;
 
-		// Create a new button
-		var button = document.createElement("button");
-		button.innerHTML = "Column " + column_code;
-		datadiv.appendChild(button);
-		button.addEventListener ("click", function() {
-		    logTime();
-		});
 
             }, function (reason) {
                 console.error('error: ' + reason.result.error.message);
@@ -88,7 +79,7 @@
 	      valueInputOption: 'USER_ENTERED',
 	      includeValuesInResponse: 'true',
 	      responseValueRenderOption: 'UNFORMATTED_VALUE',
-	      values: [['=NOW()', 'IN', 'userid']],
+	      values: [['=NOW()', 'IN', userEmail]],
 	  };
 	  console.log(params);
 	  request = gapi.client.sheets.spreadsheets.values.append(params);
@@ -161,7 +152,13 @@
 
         function updateSignInStatus(isSignedIn) {
             if (isSignedIn) {
-                makeApiCall();
+		// Create a new button
+		var button = document.createElement("button");
+		button.innerHTML = "Sign in button";
+		datadiv.appendChild(button);
+		button.addEventListener ("click", function() {
+		    logTime();
+		});
             }
         }
 
@@ -170,7 +167,7 @@
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
         </script>
 
-    <button id="makeApiCall" onclick="makeApiCall()">Make API Call</button>
+    <button id="clock_in" onclick="logTime()">Clock in</button>
 
 
 </BODY>
