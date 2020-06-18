@@ -82,7 +82,6 @@
 	  params = {
               // The spreadsheet to request.
               spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
-
               // The ranges to retrieve from the spreadsheet.
               range: 'Sheet1!' + column_code + '2',
 	      majorDimension: 'ROWS',
@@ -91,6 +90,7 @@
 	      responseValueRenderOption: 'UNFORMATTED_VALUE',
 	      values: [['=NOW()']],
 	  };
+	  console.log(params);
 	  request = gapi.client.sheets.spreadsheets.values.append(params);
 	  request.then(function(response) {
 	      console.log(response);
