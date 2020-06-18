@@ -79,9 +79,9 @@
 
 	      request2 = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
 	      request2.then(function(response) {
-		  console.log(response.result.updatedData.values);
+		  var vals = response.result.updatedData.values[0];
 		  var datadiv = document.getElementById("datadiv");
-		  datadiv.innerHTML = "Successful clock " + status + " to sheet at time:" + sheet_time.toString();
+		  datadiv.innerHTML = "Successful clock " + status + " to sheet at time:" + vals[0];
 	      }, function(reason) {
 	          console.error('error: ' + reason.result.error.message);
 	      });
