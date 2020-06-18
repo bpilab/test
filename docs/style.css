@@ -1,6 +1,17 @@
 
-button.btn {
-  background-color: #4CAF50; /* Green */
+button.btn-grn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 25px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+}
+
+button.btn-red {
+  background-color: red;
   border: none;
   color: white;
   padding: 25px 40px;
