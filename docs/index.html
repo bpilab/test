@@ -71,7 +71,9 @@
 		var button = document.createElement("button");
 		button.innerHTML = "Column " + column_code;
 		datadiv.appendChild(button);
-		button.addEventListener ("click", logTime());
+		button.addEventListener ("click", function() {
+		    logTime();
+		});
 
             }, function (reason) {
                 console.error('error: ' + reason.result.error.message);
