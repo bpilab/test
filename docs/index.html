@@ -12,6 +12,8 @@
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
     <button id="signOut" onclick="signOut();">Sign out</button>
+    <button id="button1" hidden="true" >Clock in</button>
+    <button id="button2" hidden="true" >Clock out</button>
 
     <script>
       var userEmail = "";
@@ -118,15 +120,15 @@
       function updateSignInStatus(isSignedIn) {
           if (isSignedIn) {
 	      // Create a new button
-	      var button1 = document.createElement("button");
+	      var button1 = document.getElementById("button1");
 	      button1.innerHTML = "Clock in button";
-	      datadiv.appendChild(button1);
+	      button1.hidden = false;
 	      button1.addEventListener ("click", function() {
 		    logTime("IN");
 	      });
-	      var button2 = document.createElement("button");
+	      var button2 = document.getElementById("button2");
 	      button2.innerHTML = "Clock out button";
-	      datadiv.appendChild(button2);
+	      button2.hidden = false;
 	      button2.addEventListener ("click", function() {
 		    logTime("OUT");
 		});
