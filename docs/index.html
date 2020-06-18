@@ -82,13 +82,13 @@
 	  params = {
               // The spreadsheet to request.
               spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
-              // The ranges to retrieve from the spreadsheet.
-              range: 'Sheet1!' + column_code + ':' + column_code,
+              // The ranges to append to
+              range: 'Sheet1!B:B',
 	      majorDimension: 'COLUMNS',
 	      valueInputOption: 'USER_ENTERED',
 	      includeValuesInResponse: 'true',
 	      responseValueRenderOption: 'UNFORMATTED_VALUE',
-	      values: [['=NOW()']],
+	      values: [['=NOW()', 'IN', 'userid']],
 	  };
 	  console.log(params);
 	  request = gapi.client.sheets.spreadsheets.values.append(params);
