@@ -34,7 +34,14 @@
 
 
     <script>
-        function makeApiCall() {
+
+      var column_code = "";
+
+      function logTime() {
+	  alert("did something " + column_code);
+      }
+
+      function makeApiCall() {
             var params = {
                 // The spreadsheet to request.
                 spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
@@ -55,9 +62,16 @@
 
 		var text = "Your column in spreadsheet is: '";
 		var index = vals.indexOf(userEmail);
-		var column_code = (index < 26) ? String.fromCharCode(index + 65) :  String.fromCharCode(Math.floor(index/26) + 65, index%26 + 65);
+		column_code = (index < 26) ? String.fromCharCode(index + 65) :  String.fromCharCode(Math.floor(index/26) + 65, index%26 + 65);
 		text += column_code + "'<BR>";
-		document.getElementById("datadiv").innerHTML = text;
+		var datadiv = document.getElementById("datadiv");
+		datadiv.innerHTML = text;
+
+		// Create a new button
+		var button = document.createElement("button");
+		button.innerHTML = "Column " + column_code;
+		datadiv.appendChild(button);
+		button.addEventListener ("click", logTime());
 
             }, function (reason) {
                 console.error('error: ' + reason.result.error.message);
