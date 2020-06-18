@@ -37,10 +37,6 @@
 
       var column_code = "";
 
-      function logTime() {
-	  alert("did something " + column_code);
-      }
-
       function makeApiCall() {
             var params = {
                 // The spreadsheet to request.
@@ -78,61 +74,61 @@
             }, function (reason) {
                 console.error('error: ' + reason.result.error.message);
             });
+      }
 
-	    var sheet_time = '';
-	    var update_range = '';
-	    params = {
-                // The spreadsheet to request.
-                spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
+      function logTime() {
+	  var sheet_time = '';
+	  var update_range = '';
+	  params = {
+              // The spreadsheet to request.
+              spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
 
-                // The ranges to retrieve from the spreadsheet.
-                range: 'Sheet1!B2',
-		majorDimension: 'ROWS',
-		valueInputOption: 'USER_ENTERED',
-		includeValuesInResponse: 'true',
-		responseValueRenderOption: 'UNFORMATTED_VALUE',
-		values: [['=NOW()']],
-	    };
-	    request = gapi.client.sheets.spreadsheets.values.append(params);
-	    request.then(function(response) {
-		console.log(response);
-		var result = response.result;
-		console.log('Update Range:');
-		update_range = result.updates.updatedRange;
-		console.log(update_range);
-		sheet_time = result.updates.updatedData.values[0];
-		console.log(sheet_time);
+              // The ranges to retrieve from the spreadsheet.
+              range: 'Sheet1!' + column_code + '2',
+	      majorDimension: 'ROWS',
+	      valueInputOption: 'USER_ENTERED',
+	      includeValuesInResponse: 'true',
+	      responseValueRenderOption: 'UNFORMATTED_VALUE',
+	      values: [['=NOW()']],
+	  };
+	  request = gapi.client.sheets.spreadsheets.values.append(params);
+	  request.then(function(response) {
+	      console.log(response);
+	      var result = response.result;
+	      console.log('Update Range:');
+	      update_range = result.updates.updatedRange;
+	      console.log(update_range);
+	      sheet_time = result.updates.updatedData.values[0];
+	      console.log(sheet_time);
 
-		// Write back the value
-		params = {
-                    // The spreadsheet to request.
-                    spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
-                    range: update_range,
-		    valueInputOption: 'USER_ENTERED',
-		    includeValuesInResponse: 'true',
-		    responseValueRenderOption: 'UNFORMATTED_VALUE',
-		};
-		console.log(params);
+	      // Write back the value
+	      params = {
+                  // The spreadsheet to request.
+                  spreadsheetId: '1r-bf7Po4lCEghovNuPvpkY5EYvou9Dh8bHOQBBN0izU',
+                  range: update_range,
+		  valueInputOption: 'USER_ENTERED',
+		  includeValuesInResponse: 'true',
+		  responseValueRenderOption: 'UNFORMATTED_VALUE',
+	      };
+	      console.log(params);
 
-		var valueRangeBody = {
-		    majorDimension: 'ROWS',
-		    range: update_range,
-		    values: [sheet_time],
-		};
+	      var valueRangeBody = {
+		  majorDimension: 'ROWS',
+		  range: update_range,
+		  values: [sheet_time],
+	      };
 
-		request2 = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
-		request2.then(function(response) {
-		    console.log(response.result);
-		}, function(reason) {
-	            console.error('error: ' + reason.result.error.message);
-		});
+	      request2 = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
+	      request2.then(function(response) {
+		  console.log(response.result);
+	      }, function(reason) {
+	          console.error('error: ' + reason.result.error.message);
+	      });
 
-	    }, function(reason) {
-	        console.error('error: ' + reason.result.error.message);
-            });
-
-
-        }
+	  }, function(reason) {
+	      console.error('error: ' + reason.result.error.message);
+          });
+      }
 
         function initClient() {
             var API_KEY = 'AIzaSyCwDubLAz9XGtUvPgJq3y7cIoUIbJja_oo';  // TODO: Update placeholder with desired API key.
