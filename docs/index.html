@@ -67,7 +67,7 @@
                   range: update_range,
 		  valueInputOption: 'USER_ENTERED',
 		  includeValuesInResponse: 'true',
-		  responseValueRenderOption: 'UNFORMATTED_VALUE',
+		  responseValueRenderOption: 'FORMATTED_VALUE',
 	      };
 	      console.log(params);
 
@@ -79,7 +79,7 @@
 
 	      request2 = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
 	      request2.then(function(response) {
-		  console.log(response.result);
+		  console.log(response.result.updatedData.values);
 		  var datadiv = document.getElementById("datadiv");
 		  datadiv.innerHTML = "Successful clock " + status + " to sheet at time:" + sheet_time.toString();
 	      }, function(reason) {
